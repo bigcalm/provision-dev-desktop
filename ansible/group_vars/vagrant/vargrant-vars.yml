@@ -1,0 +1,9 @@
+---
+
+# environment types are: physical, virtualbox, qemu
+environment_type: 'virtualbox'
+
+provision_user: 'vagrant'
+provision_become: true
+
+dev_user: 'vagrant'

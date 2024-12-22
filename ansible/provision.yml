@@ -1,0 +1,20 @@
+---
+
+- hosts: desktop-dev
+  remote_user: '{{ provision_user }}'
+  become: '{{ provision_become }}'
+  roles:
+
+    - apt-upgrade
+    - basic-utils
+    - powerline-go
+    - blesh
+    - atuin
+    - geerlingguy.docker
+    - geerlingguy.php-versions
+    - geerlingguy.php
+    - { role: virtualbox, when: environment_type != 'virtualbox' }
+    - vagrant
+    - microsoft-edge
+    - snaps
+#    - git-configs

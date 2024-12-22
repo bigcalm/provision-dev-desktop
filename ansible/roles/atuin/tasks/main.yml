@@ -1,0 +1,12 @@
+---
+
+- name: Install atuin for the User
+  ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+  become_user: '{{ dev_user }}'
+
+- name: Reconfigure atuin to not hijack the up arrow
+  ansible.builtin.lineinfile:
+    path: '/home/{{ dev_user }}/.bashrc'
+    regexp: '^eval "\$\(atuin init bash\)"'
+    line: 'eval "$(atuin init bash --disable-up-arrow)"'
+  become_user: '{{ dev_user }}'

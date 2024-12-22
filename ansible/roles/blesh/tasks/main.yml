@@ -1,0 +1,21 @@
+---
+
+- name: Fetch the nightly ble.sh tarball
+  ansible.builtin.unarchive:
+    src: "https://github.com/akinomyoga/ble.sh/releases/download/nightly/ble-nightly.tar.xz"
+    dest: /tmp
+    remote_src: yes
+
+- name: Install ble.sh for the dev_user
+  ansible.builtin.shell: bash /tmp/ble-nightly/ble.sh --install ~/.local/share
+  become_user: "{{ dev_user }}"
+
+- name: Remove downloaded tarball
+  ansible.builtin.file:
+    path: /tmp/ble-nightly.tar.xz
+    state: absent
+
+- name: Update User's .bashrc
+  ansible.builtin.lineinfile:
+    path: "/home/{{ dev_user }}/.bashrc"
+    line: source ~/.local/share/blesh/ble.sh

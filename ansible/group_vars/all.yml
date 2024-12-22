@@ -1,0 +1,14 @@
+---
+
+# environment types are: physical, virtualbox, qemu
+environment_type: 'physical'
+
+provision_user: 'iain'
+provision_become: true
+
+dev_user: 'iain'
+
+docker_users:
+  - '{{ dev_user }}'
+
+php_enable_webserver: false

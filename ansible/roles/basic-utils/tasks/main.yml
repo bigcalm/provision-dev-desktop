@@ -1,0 +1,23 @@
+---
+
+- name: Install basic utilities
+  ansible.builtin.package:
+    name:
+      - build-essential
+      - curl
+      - wget
+      - w3m
+      - git
+      - zip
+      - unzip
+      - unrar
+      - htop
+      - tree
+      - jq
+      - vim
+      - gawk
+      - httpie
+      - meld
+      - mysql-client
+      - ack
+    state: present
