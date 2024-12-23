@@ -31,6 +31,13 @@ Vagrant.configure("2") do |config|
             vb.gui = true
         end
 
+        node.vm.network "private_network", type: 'dhcp'
+
+        # Create a new user called iain
+        node.vm.provision "shell", inline: "useradd -m -s /bin/bash -G sudo iain"
+        # Set the password for the new user
+        node.vm.provision "shell", inline: "echo 'iain:Password123!' | chpasswd"
+
         node.vm.provision "shell", inline: "apt-get update -y && apt-get dist-upgrade -y"
         node.vm.provision "shell", inline: "if ! command -v ansible; then apt-get install -y ansible; fi"
 
