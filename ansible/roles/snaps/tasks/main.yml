@@ -1,5 +1,10 @@
 ---
 
+- name: Install Snapd
+  package:
+    name: snapd
+    state: present
+
 - name: Install a load of snaps
   community.general.snap:
     name:

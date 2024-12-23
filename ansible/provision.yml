@@ -11,9 +11,9 @@
     - blesh
     - atuin
     - geerlingguy.docker
-    - geerlingguy.php-versions
+#    - geerlingguy.php-versions
     - geerlingguy.php
-    - { role: virtualbox, when: environment_type != 'virtualbox' }
+    - virtualbox
     - vagrant
     - microsoft-edge
     - snaps
