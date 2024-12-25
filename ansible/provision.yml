@@ -15,6 +15,7 @@
     - geerlingguy.php
     - virtualbox
     - vagrant
+    - vagrant-hostmanager-sudoers
     - 1password
     - microsoft-edge
     - snaps

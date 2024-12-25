@@ -1,0 +1,12 @@
+---
+
+- name: Create a sudoers.d entry for the vagrant-hostmanager plugin
+  ansible.builtin.copy:
+    content: |
+      Cmnd_Alias VAGRANT_HOSTMANAGER_UPDATE = /bin/cp /home/{{ provision_user }}/.vagrant.d/tmp/hosts.local /etc/hosts
+      %sudo ALL=(root) NOPASSWD: VAGRANT_HOSTMANAGER_UPDATE
+    dest: /etc/sudoers.d/vagrant_hostmanager
+    owner: root
+    group: root
+    mode: '0440'
+    validate: 'visudo -cf %s'
