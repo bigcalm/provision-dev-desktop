@@ -9,3 +9,6 @@ docker_users:
   - '{{ dev_user }}'
 
 php_enable_webserver: false
+
+tailscale_login_server: "{{ lookup('password', 'credentials/tailscale.login-server') }}"
+tailscale_authkey: "{{ lookup('password', 'credentials/tailscale.authkey') }}"
