@@ -1,0 +1,21 @@
+[user]
+	name = Iain Cuthbertson
+[push]
+        default = simple
+[core]
+        excludesfile = /home/{{ dev_user }}/.gitignore_global
+[pager]
+	branch = false
+
+[diff "minjs"]
+    textconv = js-beautify
+    cachetextconv = true
+[diff "mincss"]
+    textconv = js-beautify --css
+    cachetextconv = true
+
+[includeIf "gitdir:~/idophp/"]
+	path = ~/idophp/idophp.gitconfig
+
+[includeIf "gitdir:~/siftware/"]
+	path = ~/siftware/siftware.gitconfig

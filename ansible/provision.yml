@@ -17,4 +17,4 @@
     - vagrant
     - microsoft-edge
     - snaps
-#    - git-configs
+    - git-configs

@@ -1,0 +1,29 @@
+---
+
+- name: Create the idophp and siftware directories
+  ansible.builtin.file:
+    path: "/home/{{ dev_user }}/{{ item }}"
+    state: directory
+    owner: "{{ dev_user }}"
+    group: "{{ dev_user }}"
+    mode: 0755
+  with_items:
+    - idophp
+    - siftware
+
+- name: Install base configs
+  ansible.builtin.template:
+    src: "templates/{{ item.src }}"
+    dest: "/home/{{ dev_user }}/{{ item.dest }}"
+    owner: "{{ dev_user }}"
+    group: "{{ dev_user }}"
+    mode: 0644
+  with_items:
+    - src: "dot.gitconfig.j2"
+      dest: ".gitconfig"
+    - src: "dot.gitignore_global.j2"
+      dest: ".gitignore_global"
+    - src: "idophp/idophp.gitconfig.j2"
+      dest: "idophp/idophp.gitconfig"
+    - src: "siftware/siftware.gitconfig.j2"
+      dest: "siftware/siftware.gitconfig"
