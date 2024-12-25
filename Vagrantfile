@@ -34,7 +34,14 @@ Vagrant.configure("2") do |config|
         node.vm.network "private_network", type: 'dhcp'
 
         # Create a new user called iain
-        node.vm.provision "shell", inline: "useradd -m -s /bin/bash -G sudo iain"
+        node.vm.provision "shell", inline: <<-SHELL
+          if id "iain" &>/dev/null; then
+            echo 'User exists - user creation skipped.'
+          else
+            echo 'User does not exist. Creating user...'
+            useradd -m -s /bin/bash -G sudo iain
+          fi
+        SHELL
         # Set the password for the new user
         node.vm.provision "shell", inline: "echo 'iain:Password123!' | chpasswd"
 
