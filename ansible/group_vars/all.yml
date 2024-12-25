@@ -1,8 +1,5 @@
 ---
 
-# environment types are: physical, virtualbox, qemu
-environment_type: 'physical'
-
 provision_user: 'iain'
 provision_become: true
 
