@@ -1,0 +1,63 @@
+---
+
+- name: Fetch 1password gpg key
+  ansible.builtin.get_url:
+    url: "https://downloads.1password.com/linux/keys/1password.asc"
+    dest: /tmp
+
+- name: Dearmor 1password gpg key
+  ansible.builtin.shell: "gpg --dearmor -o /usr/share/keyrings/1password-archive-keyring.gpg /tmp/1password.asc"
+  args:
+    creates: /usr/share/keyrings/1password-archive-keyring.gpg
+
+- name: Remove temporary 1password gpg key
+  ansible.builtin.file:
+    path: /tmp/1password.asc
+    state: absent
+
+- name: Add 1password repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main"
+    state: present
+    filename: "1password"
+
+- name: Install the debsig-verify package
+  ansible.builtin.package:
+    name: debsig-verify
+    state: present
+
+- name: Create the policy directory for 1password
+  ansible.builtin.file:
+    path: /etc/debsig/policies/AC2D62742012EA22
+    state: directory
+
+- name: Install the debsig-verify policy for 1password
+  ansible.builtin.get_url:
+    url: "https://downloads.1password.com/linux/debian/debsig/1password.pol"
+    dest: /etc/debsig/policies/AC2D62742012EA22/1password.pol
+
+- name: Create the keyring directory for the 1password policy
+  ansible.builtin.file:
+    path: /usr/share/debsig/keyrings/AC2D62742012EA22
+    state: directory
+
+- name: Fetch the gpg key for the policy for 1password
+  ansible.builtin.get_url:
+    url: "https://downloads.1password.com/linux/keys/1password.asc"
+    dest: /tmp
+
+- name: Dearmor gpg key for the policy for 1password
+  ansible.builtin.shell: "gpg --dearmor -o /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg /tmp/1password.asc"
+  args:
+    creates: /usr/share/keyrings/1password-archive-keyring.gpg
+
+- name: Remove temporary gpg key for the policy for 1password
+  ansible.builtin.file:
+    path: /tmp/1password.asc
+    state: absent
+
+- name: Install 1password
+  ansible.builtin.package:
+    name: 1password
+    state: present
+    update_cache: true
