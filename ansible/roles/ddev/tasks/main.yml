@@ -1,0 +1,35 @@
+---
+
+- name: Fetch ddev gpg key
+  ansible.builtin.get_url:
+    url: "https://pkg.ddev.com/apt/gpg.key"
+    dest: /tmp
+
+- name: Dearmor ddev gpg key
+  ansible.builtin.shell: "gpg --dearmor -o /etc/apt/keyrings/ddev.gpg /tmp/gpg.key"
+  args:
+    creates: /etc/apt/keyrings/ddev.gpg
+
+- name: Remove temporary ddev gpg key
+  ansible.builtin.file:
+    path: /tmp/gpg.key
+    state: absent
+
+- name: Add ddev repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/ddev.gpg] https://pkg.ddev.com/apt/ * *"
+    state: present
+    filename: "ddev"
+    update_cache: true
+
+- name: Install ddev
+  ansible.builtin.package:
+    name: ddev
+    state: present
+
+- name: Initialise mkcert
+  ansible.builtin.shell: "mkcert -install"
+  args:
+    creates: /home/{{ dev_user }}/.local/share/mkcert
+  become: true
+  become_user: "{{ dev_user }}"

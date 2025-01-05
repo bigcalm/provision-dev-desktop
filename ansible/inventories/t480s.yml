@@ -1,0 +1,11 @@
+---
+
+all:
+  hosts:
+    iain-t480s:
+      ansible_host: 192.168.56.15
+
+  children:
+    desktop-dev:
+      hosts:
+        iain-t480s:
