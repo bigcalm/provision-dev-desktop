@@ -12,7 +12,7 @@
     - atuin
     - geerlingguy.docker
     - ddev
-#    - geerlingguy.php-versions
+    - geerlingguy.php-versions
     - geerlingguy.php
     - virtualbox
     - vagrant
