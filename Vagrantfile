@@ -53,17 +53,17 @@ Vagrant.configure("2") do |config|
         node.vm.provision "shell", inline: "apt-get install kubuntu-desktop -y"
 
         # Invoke ansible-playbook to provision the Vagrant machine, from the Vagrant machine
-        node.vm.provision "ansible_local" do |ansible|
-            ansible.groups = {
-                "vagrant" => "desktop-dev-vm",
-                "desktop-dev" => "desktop-dev-vm"
-            }
-            ansible.provisioning_path = "/vagrant/ansible"
-            ansible.galaxy_role_file = "requirements.yml"
-            ansible.galaxy_roles_path = "roles"
-            ansible.playbook = "provision.yml"
-#             ansible.verbose = "vvv"
-        end
+#         node.vm.provision "ansible_local" do |ansible|
+#             ansible.groups = {
+#                 "vagrant" => "desktop-dev-vm",
+#                 "desktop-dev" => "desktop-dev-vm"
+#             }
+#             ansible.provisioning_path = "/vagrant/ansible"
+#             ansible.galaxy_role_file = "requirements.yml"
+#             ansible.galaxy_roles_path = "roles"
+#             ansible.playbook = "provision.yml"
+# #             ansible.verbose = "vvv"
+#         end
 
 
     end

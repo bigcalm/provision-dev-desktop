@@ -17,7 +17,7 @@
 
 - name: Add hashicorp repository
   ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release if ubuntu_release_override is not defined else ubuntu_release_override }} main"
     state: present
     filename: "hashicorp"
     update_cache: true

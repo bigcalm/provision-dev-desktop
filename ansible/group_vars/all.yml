@@ -17,7 +17,8 @@ docker_apt_ignore_key_error: True
 docker_apt_gpg_key: "{{ docker_repo_url }}/{{ ansible_distribution | lower }}/gpg"
 docker_apt_filename: "docker"
 
-php_version: 8.4
+php_version: "8.4"
+php_default_version_debian: "{{ php_version }}"
 php_enable_webserver: false
 
 tailscale_login_server: "{{ lookup('password', 'credentials/tailscale.login-server') }}"

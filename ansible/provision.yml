@@ -12,7 +12,8 @@
     - atuin
     - geerlingguy.docker
     - ddev
-    - geerlingguy.php-versions
+    # enable the following line if the desired version of PHP is not shipped with the OS
+#    - geerlingguy.php-versions
     - geerlingguy.php
     - virtualbox
     - vagrant

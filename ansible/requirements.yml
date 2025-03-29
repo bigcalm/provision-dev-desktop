@@ -2,11 +2,11 @@
 
 - name: geerlingguy.docker
   src: https://github.com/geerlingguy/ansible-role-docker.git
-  version: '7.4.3'
+  version: '7.4.7'
 
 - name: geerlingguy.php-versions
   src: https://github.com/geerlingguy/ansible-role-php-versions.git
-  version: '6.2.0'
+  version: '7.0.0'
 
 - name: geerlingguy.php
   src: https://github.com/geerlingguy/ansible-role-php.git
