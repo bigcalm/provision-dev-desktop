@@ -1,0 +1,14 @@
+---
+
+all:
+  hosts:
+    iain-fw16:
+      ansible_host: 192.168.1.131
+
+  children:
+    desktop-dev:
+      hosts:
+        iain-fw16:
+
+  vars:
+    ubuntu_release_override: noble
