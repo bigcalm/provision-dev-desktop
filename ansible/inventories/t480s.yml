@@ -6,6 +6,6 @@ all:
       ansible_host: 192.168.1.219
 
   children:
-    desktop-dev:
+    desktop_dev:
       hosts:
         iain-t480s:

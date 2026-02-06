@@ -6,6 +6,6 @@ all:
       ansible_host: 192.168.1.231
 
   children:
-    desktop-dev:
+    desktop_dev:
       hosts:
         kubuntu-tester:

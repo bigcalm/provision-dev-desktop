@@ -8,7 +8,7 @@ dev_user: 'iain'
 docker_users:
   - '{{ dev_user }}'
 
-ubuntu_release_override: oracular
+#ubuntu_release_override: oracular
 
 docker_apt_release_channel: stable
 docker_apt_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"

@@ -12,6 +12,7 @@
       - unzip
       - unrar
       - htop
+      - btm
       - tree
       - jq
       - vim
