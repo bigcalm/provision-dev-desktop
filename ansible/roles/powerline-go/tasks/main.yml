@@ -33,3 +33,19 @@
       if type powerline-go > /dev/null 2>&1; then
         PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
       fi
+
+- name: Update user's config.fish
+  ansible.builtin.blockinfile:
+    path: "/home/{{ dev_user }}/.config/fish/config.fish"
+    append_newline: true
+    prepend_newline: true
+    block: |
+      function fish_prompt
+          powerline-go \
+              -newline \
+              -error $status \
+              -cwd-max-depth 4 \
+              -hostname-only-if-ssh \
+              -jobs $(jobs -p | wc -l) \
+              -modules 'time,venv,user,host,ssh,cwd,perms,git,hg,jobs,exit'
+      end

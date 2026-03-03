@@ -1,11 +1,11 @@
 ---
-
 - name: Install basic utilities
   ansible.builtin.package:
     name:
       - build-essential
       - curl
       - wget
+      - fish
       - w3m
       - git
       - zip
