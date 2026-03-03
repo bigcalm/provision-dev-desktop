@@ -3,9 +3,12 @@
 all:
   hosts:
     iain-t480s:
-      ansible_host: 192.168.1.219
+      ansible_host: 192.168.1.123
 
   children:
     desktop_dev:
       hosts:
         iain-t480s:
+
+  vars:
+    ubuntu_release_override: noble
