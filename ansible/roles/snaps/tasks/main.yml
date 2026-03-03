@@ -15,6 +15,7 @@
       - telegram-desktop
       - joplin-desktop
       - thunderbird
+      - spotify
 
 - name: Install PhpStorm
   community.general.snap:

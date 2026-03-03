@@ -20,7 +20,6 @@
     - vagrant-hostmanager-sudoers
     - 1password
     - microsoft-edge
-    - spotify
     - snaps
     - git-configs
     - tailscale
