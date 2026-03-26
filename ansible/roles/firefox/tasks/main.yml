@@ -1,0 +1,39 @@
+---
+
+- name: Ensure firefox is not installed as a snap
+  community.general.snap:
+     name: firefox
+     state: absent
+
+- name: Fetch Mozilla APT gpg key
+  ansible.builtin.get_url:
+    url: "https://packages.mozilla.org/apt/repo-signing-key.gpg"
+    dest: /etc/apt/keyrings/packages.mozilla.org.asc
+
+- name: Add Mozilla APT repository
+  ansible.builtin.deb822_repository:
+    name: mozilla
+    types: deb
+    uris: https://packages.mozilla.org/apt
+    suites: mozilla
+    components: main
+    architectures: amd64
+    signed_by: /etc/apt/keyrings/packages.mozilla.org.asc
+
+- name: Create apt preferences file to favour apt for mozilla packages
+  ansible.builtin.copy:
+    src: etc-apt-preferences.d-mozilla
+    dest: /etc/apt/preferences.d/mozilla
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+
+- name: Update the apt cache
+  ansible.builtin.apt:
+    update:cache: yes
+
+- name: Install firefox
+  ansible.builtin.package:
+    name: firefox-l10n-en-gb
+    state: present

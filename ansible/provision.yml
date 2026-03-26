@@ -7,9 +7,8 @@
 
     - apt-upgrade
     - basic-utils
-    - powerline-go
-    - blesh
-    - atuin
+    - ctorgalson.nerdfonts
+    - fish
     - geerlingguy.docker
     - ddev
     # enable the following line if the desired version of PHP is not shipped with the OS
@@ -18,6 +17,7 @@
     - virtualbox
     - vagrant
     - vagrant-hostmanager-sudoers
+    - firefox
     - 1password
     - microsoft-edge
     - snaps

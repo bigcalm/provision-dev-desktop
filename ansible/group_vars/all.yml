@@ -10,6 +10,24 @@ docker_users:
 
 #ubuntu_release_override: oracular
 
+nf_user: "{{ dev_user }}"
+nf_single_fonts:
+  - "Meslo/S/Regular/MesloLGSNerdFont-Regular.ttff"
+  - "Meslo/S/Regular/MesloLGSNerdFontMono-Regular.ttff"
+  - "Meslo/S/Regular/MesloLGSNerdFontPropo-Regular.ttff"
+
+  - "Meslo/S/Regular/MesloLGSNerdFont-Bold.ttff"
+  - "Meslo/S/Regular/MesloLGSNerdFontMono-Bold.ttff"
+  - "Meslo/S/Regular/MesloLGSNerdFontPropo-Bold.ttff"
+
+  - "Meslo/S/Regular/MesloLGSNerdFont-Italic.ttff"
+  - "Meslo/S/Regular/MesloLGSNerdFontMono-Italic.ttff"
+  - "Meslo/S/Regular/MesloLGSNerdFontPropo-Italic.ttff"
+
+  - "Meslo/S/Regular/MesloLGSNerdFont-BoldItalic.ttff"
+  - "Meslo/S/Regular/MesloLGSNerdFontMono-BoldItalic.ttff"
+  - "Meslo/S/Regular/MesloLGSNerdFontPropo-BoldItalic.ttff"
+
 docker_apt_release_channel: stable
 docker_apt_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"
 docker_apt_repository: "deb [arch={{ docker_apt_arch }}{{' signed-by=/etc/apt/keyrings/docker.asc' if add_repository_key is not failed}}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release if ubuntu_release_override is not defined else ubuntu_release_override }} {{ docker_apt_release_channel }}"

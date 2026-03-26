@@ -1,5 +1,9 @@
 ---
 
+- name: ctorgalson.nerdfonts
+  src: https://github.com/ctorgalson/ansible-role-nerdfonts.git
+  version: '1.0.1'
+
 - name: geerlingguy.docker
   src: https://github.com/geerlingguy/ansible-role-docker.git
   version: '7.4.7'
