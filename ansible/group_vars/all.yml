@@ -12,21 +12,21 @@ docker_users:
 
 nf_user: "{{ dev_user }}"
 nf_single_fonts:
-  - "Meslo/S/Regular/MesloLGSNerdFont-Regular.ttff"
-  - "Meslo/S/Regular/MesloLGSNerdFontMono-Regular.ttff"
-  - "Meslo/S/Regular/MesloLGSNerdFontPropo-Regular.ttff"
+  - "Meslo/S/Regular/MesloLGSNerdFont-Regular.ttf"
+  - "Meslo/S/Regular/MesloLGSNerdFontMono-Regular.ttf"
+  - "Meslo/S/Regular/MesloLGSNerdFontPropo-Regular.ttf"
 
-  - "Meslo/S/Regular/MesloLGSNerdFont-Bold.ttff"
-  - "Meslo/S/Regular/MesloLGSNerdFontMono-Bold.ttff"
-  - "Meslo/S/Regular/MesloLGSNerdFontPropo-Bold.ttff"
+  - "Meslo/S/Bold/MesloLGSNerdFont-Bold.ttf"
+  - "Meslo/S/Bold/MesloLGSNerdFontMono-Bold.ttf"
+  - "Meslo/S/Bold/MesloLGSNerdFontPropo-Bold.ttf"
 
-  - "Meslo/S/Regular/MesloLGSNerdFont-Italic.ttff"
-  - "Meslo/S/Regular/MesloLGSNerdFontMono-Italic.ttff"
-  - "Meslo/S/Regular/MesloLGSNerdFontPropo-Italic.ttff"
+  - "Meslo/S/Italic/MesloLGSNerdFont-Italic.ttf"
+  - "Meslo/S/Italic/MesloLGSNerdFontMono-Italic.ttf"
+  - "Meslo/S/Italic/MesloLGSNerdFontPropo-Italic.ttf"
 
-  - "Meslo/S/Regular/MesloLGSNerdFont-BoldItalic.ttff"
-  - "Meslo/S/Regular/MesloLGSNerdFontMono-BoldItalic.ttff"
-  - "Meslo/S/Regular/MesloLGSNerdFontPropo-BoldItalic.ttff"
+  - "Meslo/S/Bold-Italic/MesloLGSNerdFont-BoldItalic.ttf"
+  - "Meslo/S/Bold-Italic/MesloLGSNerdFontMono-BoldItalic.ttf"
+  - "Meslo/S/Bold-Italic/MesloLGSNerdFontPropo-BoldItalic.ttf"
 
 docker_apt_release_channel: stable
 docker_apt_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"
@@ -35,7 +35,7 @@ docker_apt_ignore_key_error: True
 docker_apt_gpg_key: "{{ docker_repo_url }}/{{ ansible_distribution | lower }}/gpg"
 docker_apt_filename: "docker"
 
-php_version: "8.4"
+php_version: "8.5"
 php_default_version_debian: "{{ php_version }}"
 php_enable_webserver: false
 

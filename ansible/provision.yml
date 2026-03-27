@@ -12,7 +12,7 @@
     - geerlingguy.docker
     - ddev
     # enable the following line if the desired version of PHP is not shipped with the OS
-#    - geerlingguy.php-versions
+    # - geerlingguy.php-versions
     - geerlingguy.php
     - virtualbox
     - vagrant

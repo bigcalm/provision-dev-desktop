@@ -29,11 +29,9 @@
     mode: '0644'
     backup: yes
 
-- name: Update the apt cache
-  ansible.builtin.apt:
-    update:cache: yes
-
 - name: Install firefox
-  ansible.builtin.package:
+  ansible.builtin.apt:
     name: firefox-l10n-en-gb
-    state: present
+    state: latest
+    allow_downgrade: yes
+    update_cache: yes
