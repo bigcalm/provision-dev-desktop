@@ -1,0 +1,4 @@
+---
+
+konsole_config_dir: "/home/{{ dev_user }}/.config"
+konsole_data_dir: "/home/{{ dev_user }}/.local/share/konsole"

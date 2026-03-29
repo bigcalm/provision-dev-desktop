@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ $# -ne 1 ]; then
+    echo 'usage: ./provision TARGET_HOST'
+    echo 'example: ./provision 192.168.1.230'
+    exit 1
+fi
+
+export TARGET_HOST="${1}"
+
+#ansible-galaxy collection install -r ansible/requirements.yml -p ansible/collections
+ansible-galaxy install -f -r ansible/requirements.yml -p ansible/roles
+
+ansible-playbook ansible/provision.yml -i ${TARGET_HOST}, 
+# --ask-become-pass

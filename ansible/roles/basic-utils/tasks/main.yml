@@ -21,4 +21,5 @@
       - meld
       - mysql-client
       - ack
+      - ansible
     state: present

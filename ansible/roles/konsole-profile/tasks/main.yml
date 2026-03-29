@@ -1,0 +1,56 @@
+---
+
+- name: Ensure Konsole directories exists
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  with_items:
+    - "{{ konsole_config_dir }}"
+    - "{{ konsole_data_dir }}"
+  become: yes
+  become_user: '{{ dev_user }}'
+
+- name: Create Konsole profile file
+  ansible.builtin.copy:
+    src: AnsibleProfile.profile
+    dest: "{{ konsole_data_dir }}/AnsibleProfile.profile"
+    mode: '0644'
+  become: yes
+  become_user: '{{ dev_user }}'
+
+- name: Ensure konsolerc exists
+  ansible.builtin.file:
+    path: "{{ konsole_config_dir }}/konsolerc"
+    state: touch
+    mode: '0644'
+  become: yes
+  become_user: '{{ dev_user }}'
+
+- name: Check if [Desktop Entry] section exists in konsolerc
+  ansible.builtin.command: grep -q "^\[Desktop Entry\]" "{{ konsole_config_dir }}/konsolerc"
+  register: desktop_entry_section_exists
+  failed_when: false
+  changed_when: false
+  become: yes
+  become_user: '{{ dev_user }}'
+
+- name: Add [Desktop Entry] section if it doesn't exist
+  ansible.builtin.lineinfile:
+    path: "{{ konsole_config_dir }}/konsolerc"
+    line: "[Desktop Entry]"
+    insertbefore: BOF
+    state: present
+  become: yes
+  become_user: '{{ dev_user }}'
+  when: desktop_entry_section_exists.rc != 0
+
+- name: Set default profile in konsolerc
+  ansible.builtin.lineinfile:
+    path: "{{ konsole_config_dir }}/konsolerc"
+    regexp: "^DefaultProfile=.*"
+    line: "DefaultProfile=AnsibleProfile.profile"
+    insertafter: '^\[Desktop Entry\]'
+    state: present
+  become: yes
+  become_user: '{{ dev_user }}'

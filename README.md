@@ -12,7 +12,20 @@ On the target host, install and enable the openssh server, and copy over your pu
 sudo apt install openssh-server
 ```
 
+Also allow the provisioning user to run `sudo` without entering a password:
+
+```shell
+echo 'iain ALL=(ALL) NOPASSWD:ALL' | sudo tee /etc/sudoers.d/iain
+```
+
 On this host...
+
+Copy your public SSH key to the target server:
+
+```
+ssh 192.168.56.7 mkdir -p ~/.ssh
+scp ~/.ssh/id_ed25519.pub 192.168.56.7:.ssh/authorized_keys
+```
 
 Create `credentials/tailscale.login-server` and set the headscale management server address:
 
@@ -26,24 +39,8 @@ Same for `credentials/tailscale.authkey` to set a valid key for use with headsca
 echo 'abc123' > ansible/credentials/tailscale.authkey
 ```
 
-Create an inventory file for the target host:
-
-```yaml
----
-
-all:
-  hosts:
-    iain-precision5530:
-      ansible_host: 192.168.1.231
-
-  children:
-    desktop_dev:
-      hosts:
-        iain-precision5530:
-```
-
-Trigger the `provision.sh script with the target host's inventory name. This will first install the required ansible roles & collections. And then run the ansible playbook against the target host:
+Trigger the `provision` script with the target host IP address. This will first install the required ansible roles & collections. And then run the ansible playbook against the target:
 
 ```shell
-./provision.sh precision5530
+./provision 192.168.56.7
 ```

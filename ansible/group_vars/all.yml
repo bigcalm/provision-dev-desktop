@@ -8,7 +8,9 @@ dev_user: 'iain'
 docker_users:
   - '{{ dev_user }}'
 
-#ubuntu_release_override: oracular
+# set these to the latest/previous LTS codename if packages don't exist
+docker_apt_override: noble
+vagrant_apt_override: noble
 
 nf_user: "{{ dev_user }}"
 nf_single_fonts:
@@ -30,7 +32,7 @@ nf_single_fonts:
 
 docker_apt_release_channel: stable
 docker_apt_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"
-docker_apt_repository: "deb [arch={{ docker_apt_arch }}{{' signed-by=/etc/apt/keyrings/docker.asc' if add_repository_key is not failed}}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release if ubuntu_release_override is not defined else ubuntu_release_override }} {{ docker_apt_release_channel }}"
+docker_apt_repository: "deb [arch={{ docker_apt_arch }}{{' signed-by=/etc/apt/keyrings/docker.asc' if add_repository_key is not failed}}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release if docker_apt_override is not defined else docker_apt_override }} {{ docker_apt_release_channel }}"
 docker_apt_ignore_key_error: True
 docker_apt_gpg_key: "{{ docker_repo_url }}/{{ ansible_distribution | lower }}/gpg"
 docker_apt_filename: "docker"

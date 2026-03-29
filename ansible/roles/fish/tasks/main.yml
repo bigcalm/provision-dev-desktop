@@ -10,20 +10,25 @@
 
 - name: Install the fish shell plugin manager "fisher"
   ansible.builtin.shell: |
-    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish --output ~/.config/fish/functions/fisher.fish
-    and fisher install jorgebucaran/fisher
+    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
   args:
     executable: /usr/bin/fish
-    creates: ~/.config/fish/functions/fisher.fish
+    creates: /home/{{ dev_user }}/.config/fish/functions/fisher.fish
+  become: yes
+  become_user: "{{ dev_user }}"
 
 - name: Install the tide theme for fish shell
   ansible.builtin.shell: |
       fisher install IlanCosman/tide@v6
   args:
     executable: /usr/bin/fish
+  become: yes
+  become_user: "{{ dev_user }}"
 
 - name: Configure the tide theme
   ansible.builtin.shell: |
       tide configure --auto --style=Rainbow --prompt_colors='True color' --show_time='12-hour format' --rainbow_prompt_separators=Slanted --powerline_prompt_heads=Sharp --powerline_prompt_tails=Flat --powerline_prompt_style='Two lines, character' --prompt_connection=Solid --powerline_right_prompt_frame=No --prompt_connection_andor_frame_color=Dark --prompt_spacing=Sparse --icons='Many icons' --transient=No
   args:
     executable: /usr/bin/fish
+  become: yes
+  become_user: "{{ dev_user }}"
