@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
     config.ssh.forward_agent = true
 
     config.vm.define "desktop-dev-vm" do |node|
-        node.vm.box = "bento/ubuntu-24.04"
+        node.vm.box = "bento/ubuntu-26.04"
 
         node.vm.hostname = "desktop-dev-vm"
 
@@ -44,6 +44,8 @@ Vagrant.configure("2") do |config|
         SHELL
         # Set the password for the new user
         node.vm.provision "shell", inline: "echo 'iain:Password123!' | chpasswd"
+
+        node.vm.provision "shell", inline: "sed -i 's|us\.archive\.ubuntu\.com|gb.archive.ubuntu.com|g' /etc/apt/sources.list.d/ubuntu.sources"
 
         node.vm.provision "shell", inline: "apt-get update -y && apt-get dist-upgrade -y"
         node.vm.provision "shell", inline: "if ! command -v ansible; then apt-get install -y ansible; fi"

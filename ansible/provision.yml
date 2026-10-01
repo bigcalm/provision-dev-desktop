@@ -20,7 +20,7 @@
     - vagrant-hostmanager-sudoers
     - firefox
     - 1password
-    - microsoft-edge
+    # - microsoft-edge
     - snaps
     - git-configs
     - tailscale

@@ -9,26 +9,26 @@ docker_users:
   - '{{ dev_user }}'
 
 # set these to the latest/previous LTS codename if packages don't exist
-docker_apt_override: noble
-vagrant_apt_override: noble
+# docker_apt_override: noble
+# vagrant_apt_override: noble
 
 nf_user: "{{ dev_user }}"
 nf_single_fonts:
-  - "Meslo/S/Regular/MesloLGSNerdFont-Regular.ttf"
-  - "Meslo/S/Regular/MesloLGSNerdFontMono-Regular.ttf"
-  - "Meslo/S/Regular/MesloLGSNerdFontPropo-Regular.ttf"
+  - "Meslo/S/MesloLGSNerdFont-Regular.ttf"
+  - "Meslo/S/MesloLGSNerdFontMono-Regular.ttf"
+  - "Meslo/S/MesloLGSNerdFontPropo-Regular.ttf"
 
-  - "Meslo/S/Bold/MesloLGSNerdFont-Bold.ttf"
-  - "Meslo/S/Bold/MesloLGSNerdFontMono-Bold.ttf"
-  - "Meslo/S/Bold/MesloLGSNerdFontPropo-Bold.ttf"
+  - "Meslo/S/MesloLGSNerdFont-Bold.ttf"
+  - "Meslo/S/MesloLGSNerdFontMono-Bold.ttf"
+  - "Meslo/S/MesloLGSNerdFontPropo-Bold.ttf"
 
-  - "Meslo/S/Italic/MesloLGSNerdFont-Italic.ttf"
-  - "Meslo/S/Italic/MesloLGSNerdFontMono-Italic.ttf"
-  - "Meslo/S/Italic/MesloLGSNerdFontPropo-Italic.ttf"
+  - "Meslo/S/MesloLGSNerdFont-Italic.ttf"
+  - "Meslo/S/MesloLGSNerdFontMono-Italic.ttf"
+  - "Meslo/S/MesloLGSNerdFontPropo-Italic.ttf"
 
-  - "Meslo/S/Bold-Italic/MesloLGSNerdFont-BoldItalic.ttf"
-  - "Meslo/S/Bold-Italic/MesloLGSNerdFontMono-BoldItalic.ttf"
-  - "Meslo/S/Bold-Italic/MesloLGSNerdFontPropo-BoldItalic.ttf"
+  - "Meslo/S/MesloLGSNerdFont-BoldItalic.ttf"
+  - "Meslo/S/MesloLGSNerdFontMono-BoldItalic.ttf"
+  - "Meslo/S/MesloLGSNerdFontPropo-BoldItalic.ttf"
 
 docker_apt_release_channel: stable
 docker_apt_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"
@@ -40,6 +40,20 @@ docker_apt_filename: "docker"
 php_version: "8.5"
 php_default_version_debian: "{{ php_version }}"
 php_enable_webserver: false
+
+# Ubuntu 26.04 has no libpcre3-dev, php{{ php_version }}-imap or php{{ php_version }}-opcache:
+# the geerlingguy.php role still lists all three, so override the package list.
+php_packages:
+  - "php{{ php_version }}-common"
+  - "php{{ php_version }}-cli"
+  - "php{{ php_version }}-dev"
+  - "php{{ php_version }}-fpm"
+  - "php{{ php_version }}-gd"
+  - "php{{ php_version }}-curl"
+  - "php{{ php_version }}-xml"
+  - "php{{ php_version }}-mbstring"
+  - "php{{ php_version }}-apcu"
+  - "php{{ php_version }}-sqlite3"
 
 tailscale_login_server: "{{ lookup('password', 'credentials/tailscale.login-server') }}"
 tailscale_authkey: "{{ lookup('password', 'credentials/tailscale.authkey') }}"

@@ -22,4 +22,6 @@
       - mysql-client
       - ack
       - ansible
+      # for ddev local HTTPS certificates
+      - mkcert
     state: present
